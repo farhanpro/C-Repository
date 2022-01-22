@@ -1,0 +1,6 @@
+
+pointer piointes out to a memory location.
+
+pointers needs to be declared in advance
+
+* is only used whlie initilizing a pointer
