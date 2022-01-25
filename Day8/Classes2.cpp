@@ -1,49 +1,73 @@
-#include<iostream>
-#include<string>
+//
+//  main.cpp
+//  get_started
+//
+//  Created by lco on 19/04/20.
+//  Copźright © 2020 lco. All rights reserved.
+// https://stackoverflow.com/questions/4172722/what-is-the-rule-of-three
+
+#include <iostream>
+#include <string>
 using namespace std;
 
 class Phone{
-    string _name = " ";
-    string _os = " ";
-    int price  = 0;
-
-public : 
+    string _name = "";
+    string _os = "";
+    int _price = 0;
     Phone(); //default constructor
-     Phone(const string &name ,const string  &os,const int & price); //Parameter Constructor 
-     Phone(const Phone &); // Copy Constructor
-     string getName(){return _os;}
-    // ~Phone(); // Destructor
-
+public:
+   
+    Phone(const string & name, const string & os, const int & price); //parameter constructor
+    Phone(const Phone &); // copy constructor
+    string getName(){
+        printf("Value of getName is %p\n", this);
+        return _os;
+        
+    }
+    int getPrice();
+    ~Phone(); //destructor
 };
-Phone::Phone() : _name(),_os("Android"), price(){puts("Default Constructor");};
 
-Phone::Phone(const string &name ,const string  &os,const int & price) : _name(name), _os(os), price(price)
-{
-    puts("This is Parameter Constructor");
+int Phone::getPrice(){
+    printf("Value of getPrice is %p\n", this);
+    return _price;
 }
 
-Phone::Phone(const Phone & values){ 
-    puts("OverWrite Copy Constructor");
-    _name = values._name;
-    _os = "Skinned-"+values._os;
-    price = values.price;
+Phone::Phone() : _name(), _os("Andy"), _price(){
+    puts("Default constructor");
 }
 
-Phone:: ~Phone()
-{
-    printf("Destructor Called For  %s\n",_name.c_str());
+Phone::Phone(const string & name, const string & os, const int & price) : _name(name), _os(os), _price(price){
+    puts("this is parameter constructor");
 }
+
+Phone::Phone(const Phone & values){
+    puts("OVERWRITE copy constructor");
+    _name = "new-"+values._name;
+    _os = "skinned-"+values._os;
+    _price = values._price;
+}
+
+Phone::~Phone(){
+    printf("Destructor called for %s\n", _name.c_str());
+}
+
 
 int main()
 {
-    Phone SamsungA2;
-    cout<<SamsungA2.getName()<<endl;
+   
+//    Phone samsungA1;
+//    cout << samsungA1.getName() << endl;
     
-    Phone OnePlus8("OnePlus8","Android",799);
+    Phone OnePlus8("OP8", "Android-Oxy", 799);
+    cout << OnePlus8.getName() << endl;
     
+    printf("Value of object is %p\n", &OnePlus8);
+    
+    cout << OnePlus8.getPrice() << endl;
+   
     Phone OnePlus8S = OnePlus8;
-    cout<<OnePlus8S.getName()<<endl;
+    cout << OnePlus8S.getName() << endl;
     
     return 0;
-
 }
